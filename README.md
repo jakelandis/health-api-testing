@@ -1,14 +1,14 @@
-Mixed Cluster Docker for testing
+Health API testing
 ----------
 
-Build local docker distribution for both master and latest-1 (ie. if master is 8.0.0 then latest-1 is the 7.x branch)
+3 node cluster with a single master elible node. Security disabled.
 
-Do this for both the master branch and latest-1 branch
+
 ```bash
 ./gradlew :distribution:docker:assemble
 ```
 
-Ensure docker images are installed, we should have the latest and latest-1 images (also ensure create time is correct)
+
 ```bash
 docker images | grep elasticsearch
 ```
