@@ -3,6 +3,42 @@ Health API testing
 
 3 node cluster with a single master elible node. Security disabled.
 
+### Access Minio
+
+
+
+Access Key:
+```
+AKIAIOSFODNN7EXAMPLE
+```
+Secret Key:
+```
+wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+```
+
+Find the internal IP address of the minio host and set it up as repository
+
+```
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minio
+
+
+PUT _snapshot/my_minio_repository
+{
+  "type": "s3",
+  "settings": {
+    "bucket": "test",
+    "endpoint": "172.26.0.4:9000",
+    "protocol" : "http"
+  }
+}
+```
+
+console (use found IP):
+http://172.29.0.2:9000/login (use access/secret key as password ... todo: update to MINIO_ROOT_USER and MINIO_ROOT_PASSWORD)
+
+
+
+### Custom build
 
 ```bash
 ./gradlew :distribution:docker:assemble
@@ -40,4 +76,9 @@ To upgrade a node, change the version then
 ```bash
 
 docker-compose up -d --no-deps elasticsearch[1|2|3]
+```
+
+To stop the master node 
+```
+docker-compose stop elasticsearch1
 ```

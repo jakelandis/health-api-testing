@@ -4,6 +4,6 @@ node.name: elasticsearch2
 xpack.license.self_generated.type: trial
 discovery.seed_hosts: ['elasticsearch1']
 cluster.initial_master_nodes: ['elasticsearch1']
-http.port: 9201
+http.port: 9200
 xpack.security.enabled: false
 node.roles: [ data ]

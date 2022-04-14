@@ -10,9 +10,10 @@ services:
         soft: -1
         hard: -1
     ports:
-      - 9200:9200
+      - 9201:9201
     volumes:
-      - ./elasticsearch1.yml:/usr/share/elasticsearch/config/elasticsearch.yml  
+      - ./elasticsearch1.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore    
       - ./log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties 
     networks:
       - esnet
@@ -27,9 +28,10 @@ services:
         soft: -1
         hard: -1
     ports:
-      - 9201:9201
+      - 9200:9200
     volumes:
       - ./elasticsearch2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore 
       - ./log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties   
     networks:
       - esnet
@@ -49,6 +51,7 @@ services:
       - 9202:9202
     volumes:
       - ./elasticsearch3.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore 
       - ./log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties   
     networks:
       - esnet
@@ -71,7 +74,19 @@ services:
   #     - elasticsearch2
   #     - elasticsearch3
 
-
+  minio:
+    image: minio/minio
+    container_name: minio 
+    command: server /data
+    environment:
+      - "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE"
+      - "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+    ports:
+      - 9000:9000
+    volumes:
+      - /data:/home/jakelandis/workspace/data/minio
+    networks:
+      - esnet
 
 networks:
   esnet:
