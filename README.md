@@ -1,10 +1,11 @@
 Health API testing
 ----------
 
-3 node cluster with a single master elible node. Security disabled.
+3 node cluster , 2 data nodes and 1 master (elasticsearch1) with a snapshot repository available. 
+Security disabled. 
+Custom plain text logger. 
 
 ### Access Minio
-
 
 
 Access Key:
@@ -61,24 +62,18 @@ Ensure all 3 are running and in the same cluster:
 curl localhost:9200/_cat/nodes?v
 ```
 
-Double check the versions and send command directly to desired host
-
-```bash
-curl -v localhost:9200
-curl -v localhost:9201
-curl -v localhost:9202
-```
 
 Optional: In `docker-compose.yml` uncomment Kibana and point it to the desired host.
 
 
-To upgrade a node, change the version then
+To change a nodes configuration (including upgrading version)
 ```bash
 
 docker-compose up -d --no-deps elasticsearch[1|2|3]
 ```
 
-To stop the master node 
+To stop/start the master node 
 ```
 docker-compose stop elasticsearch1
+docker-compose start elasticsearch1
 ```
