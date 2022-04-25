@@ -1,9 +1,12 @@
 Health API testing
 ----------
 
-3 node cluster , 2 data nodes and 1 master (elasticsearch1) with a snapshot repository available. 
+3 node cluster , 2 data nodes and 1 master with a snapshot repository available. 
 Security disabled. 
 Custom plain text logger. 
+elasticsearch1 - master , port 9201
+elasticsearch2 - data_hot/content , port 9200
+elasticsearch3 - data_warm/content, port 9202
 
 ### Access Minio
 
