@@ -2,9 +2,8 @@ network.host: _site_
 cluster.name: docker
 node.name: elasticsearch3
 xpack.license.self_generated.type: trial
-discovery.seed_hosts: ['elasticsearch1']
-cluster.initial_master_nodes: ['elasticsearch1']
+discovery.seed_hosts: ['elasticsearch1', 'elasticsearch2', 'elasticsearch3']
+cluster.initial_master_nodes: ['elasticsearch1','elasticsearch2', 'elasticsearch3']
 http.port: 9202
 xpack.security.enabled: false
-node.roles: [ data_warm ]
-node.attr.data: hot
+node.roles: [ master, data_cold ]
